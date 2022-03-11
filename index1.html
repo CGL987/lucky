@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .container {
+      margin: 0;
+      padding: 5px 5px;
+      border: 1px solid #000;
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .container .item {
+      width: 100px;
+      height: 100px;
+      list-style: none;
+      box-sizing: border-box;
+      border-right: 1px solid #000;
+      border-bottom: 1px solid #000;
+      text-align: center;
+      line-height: 100px;
+    }
+    .container .one {
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      border-left: 1px solid #000;
+    }
+    .container .two {
+      position: absolute;
+      left: 100px;
+      top: 5px;
+    }
+    .container .three {
+      position: absolute;
+      left: 200px;
+      top: 5px;
+    }
+    .container .four {
+      position: absolute;
+      left: 200px;
+      top: 100px;
+    }
+    .container .five {
+      position: absolute;
+      left: 200px;
+      top: 200px;
+    }
+    .container .six {
+      position: absolute;
+      left: 100px;
+      top: 200px;
+    }
+    .container .seven {
+      position: absolute;
+      left: 5px;
+      top: 200px;
+      border-left: 1px solid #000;
+    }
+    .container .eight {
+      position: absolute;
+      left: 5px;
+      top: 100px;
+      border-left: 1px solid #000;
+    }
+    .container .btn {
+      position: absolute;
+      left: 100px;
+      top: 100px;
+    }
+    .container .item:nth-child(-n + 3) {
+      border-top: 1px solid #000;
+    }
+    .active {
+      background-color: yellow;
+    }
+  </style>
+  <body>
+    <ul class="container">
+      <li class="item one">1</li>
+      <li class="item two">2</li>
+      <li class="item three">3</li>
+      <li class="item four">4</li>
+      <li class="item btn">抽奖</li>
+      <li class="item five">5</li>
+      <li class="item six">6</li>
+      <li class="item seven">7</li>
+      <li class="item eight">8</li>
+    </ul>
+  </body>
+  <script>
+    // 获取元素
+    var btn = document.querySelector(".btn");
+    var item = document.querySelectorAll(".item");
+    var end = parseInt((Math.random() + 1) * 50);
+    var i = 0;
+    var j = 0;
+    console.log(end);
+    btn.onclick = function () {
+      let timer = setInterval(function change() {
+        if (i != 4 && i <= 8) {
+          for (let k = 0; k < item.length; k++) {
+            item[k].classList.remove("active");
+          }
+          item[i].classList.add("active");
+          i++;
+          j++;
+        } else if (i == 4) {
+          i++;
+        } else if (i == 9) {
+          i = 0;
+        }
+        if (j + 1 == end) {
+          clearInterval(timer);
+          j = 0;
+          alert("恭喜您中了" + item[i - 2].innerHTML + "等奖");
+          end = parseInt((Math.random() + 1) * 50);
+        }
+        console.log(j);
+      }, 100);
+    };
+  </script>
+</html>

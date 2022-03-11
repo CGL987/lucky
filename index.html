@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .container {
+      margin: 0;
+      padding: 5px 5px;
+      border: 1px solid #000;
+      width: 400px;
+      height: 400px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .container .item {
+      flex: 30%;
+      list-style: none;
+      box-sizing: border-box;
+      border-right: 1px solid #000;
+      border-bottom: 1px solid #000;
+      text-align: center;
+      line-height: 130px;
+    }
+    .container .item:nth-child(-n + 3) {
+      border-top: 1px solid #000;
+    }
+    .container .item:nth-child(1) {
+      border-left: 1px solid #000;
+    }
+    .container .item:nth-child(4) {
+      border-left: 1px solid #000;
+    }
+    .container .item:nth-child(7) {
+      border-left: 1px solid #000;
+    }
+    .active {
+      background-color: yellow;
+    }
+  </style>
+  <body>
+    <ul class="container">
+      <li class="item one">1</li>
+      <li class="item two">2</li>
+      <li class="item three">3</li>
+      <li class="item four">4</li>
+      <li class="item btn">抽奖</li>
+      <li class="item five">5</li>
+      <li class="item six">6</li>
+      <li class="item seven">7</li>
+      <li class="item eight">8</li>
+    </ul>
+  </body>
+  <script>
+    // 获取元素
+    var btn = document.querySelector(".btn");
+    var item = document.querySelectorAll(".item");
+    var end = parseInt((Math.random() + 1) * 100);
+    var i = 0;
+    var j = 0;
+    console.log(end);
+    btn.onclick = function () {
+      let timer = setInterval(function change() {
+        if (i != 4 && i <= 8) {
+          for (let k = 0; k < item.length; k++) {
+            item[k].classList.remove("active");
+          }
+          item[i].classList.add("active");
+          i++;
+          j++;
+        } else if (i == 4) {
+          i++;
+        } else if (i == 9) {
+          i = 0;
+        }
+        if (j == end) {
+          clearInterval(timer);
+          alert("恭喜您中了" + item[i].innerHTML + "等奖");
+        }
+        console.log(i);
+      }, 100);
+    };
+  </script>
+</html>
